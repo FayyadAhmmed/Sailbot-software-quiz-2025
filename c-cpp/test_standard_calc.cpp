@@ -45,7 +45,7 @@ void test_between_basic1(CuTest *tc) {
 
     // wrap-around
     CuAssertTrue(tc, is_angle_between(350, 0, 10));
-    CuAssertTrue(tc, is_angle_between(350, 180, 10));
+    CuAssertTrue(tc, !is_angle_between(350, 180, 10));
 
 }
 
