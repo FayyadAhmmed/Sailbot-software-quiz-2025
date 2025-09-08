@@ -28,19 +28,19 @@ void test_between_basic1(CuTest *tc) {
     // given cases
     CuAssertTrue(tc, is_angle_between(0, 1, 2));
     CuAssertTrue(tc, is_angle_between(0, 45, 90));
-    CuAssertFalse(tc, is_angle_between(45, 90, 270));
+    CuAssertTrue(tc, !is_angle_between(45, 90, 270));
 
     // undefined "middle"
-    CuAssertFalse(tc, is_angle_between(0, 0, 90));
-    CuAssertFalse(tc, is_angle_between(0, 90, 0));
-    CuAssertFalse(tc, is_angle_between(0, 45, 180));
+    CuAssertTrue(tc, !is_angle_between(0, 0, 90));
+    CuAssertTrue(tc, !is_angle_between(0, 90, 0));
+    CuAssertTrue(tc, !is_angle_between(0, 45, 180));
 
     // "direct" path is not reflex
     CuAssertTrue(tc, is_angle_between(0, 45, 90));
-    CuAssertFalse(tc, is_angle_between(0, 135, 90));
+    CuAssertTrue(tc, !is_angle_between(0, 135, 90));
 
     // "direct" path is reflex
-    CuAssertFalse(tc, is_angle_between(0, 45, 270));
+    CuAssertTrue(tc, !is_angle_between(0, 45, 270));
     CuAssertTrue(tc, is_angle_between(0, 350, 270));
 
     // wrap-around
