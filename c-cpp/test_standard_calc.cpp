@@ -8,19 +8,19 @@ void test_bound_basic1(CuTest *tc) {
 
     // given cases
     CuAssertDblEquals(tc, 0, bound_to_180(0), 0.0001);
-    CuAssertDblEquals(tc, 200, bound_to_180(-160), 0.0001);
+    CuAssertDblEquals(tc, -160, bound_to_180(200), 0.0001);
 
     // 180 and above
-    CuAssertDblEquals(tc, 180, bound_to_180(-180), 0.0001);
-    CuAssertDblEquals(tc, 360, bound_to_180(0), 0.0001);
-    CuAssertDblEquals(tc, 361, bound_to_180(1), 0.0001);
+    CuAssertDblEquals(tc, -180, bound_to_180(180), 0.0001);
+    CuAssertDblEquals(tc, 0, bound_to_180(360), 0.0001);
+    CuAssertDblEquals(tc, 1, bound_to_180(361), 0.0001);
 
     // negative angles
     CuAssertDblEquals(tc, -1, bound_to_180(-1), 0.0001);
     CuAssertDblEquals(tc, -180, bound_to_180(-180), 0.0001);
-    CuAssertDblEquals(tc, -181, bound_to_180(179), 0.0001);
-    CuAssertDblEquals(tc, -360, bound_to_180(0), 0.0001);
-    CuAssertDblEquals(tc, -361, bound_to_180(-1), 0.0001);
+    CuAssertDblEquals(tc, 179, bound_to_180(-181), 0.0001);
+    CuAssertDblEquals(tc, 0, bound_to_180(-360), 0.0001);
+    CuAssertDblEquals(tc, -1, bound_to_180(-361), 0.0001);
 }
 
 /**************** Tests for is_angle_between() *******************/
