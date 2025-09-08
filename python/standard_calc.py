@@ -51,5 +51,3 @@ def is_angle_between(first_angle, middle_angle, second_angle):
     # going "directly" from first to second is the reflex angle
     else:
         return first_middle_difference > first_second_difference
-
-
