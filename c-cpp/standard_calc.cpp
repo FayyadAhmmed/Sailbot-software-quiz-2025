@@ -18,6 +18,8 @@ float bound_to_180(float angle) {
 
     if (bound_to_360 >= 180) {
         return (float) (bound_to_360 - 360);
+    } else if (bound_to_360 >= 180) {
+        return (float) (bound_to_360 + 360);
     } else {
         return (float) bound_to_360;
     }
