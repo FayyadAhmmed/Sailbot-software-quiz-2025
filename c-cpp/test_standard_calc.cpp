@@ -5,11 +5,48 @@
 /**************** Tests for bound_to_180() *******************/
 void test_bound_basic1(CuTest *tc) {
     CuAssertDblEquals(tc, 0, bound_to_180(0), 0.0001);
+
+    // given cases
+    CuAssertDblEquals(tc, 0, bound_to_180(0), 0.0001);
+    CuAssertDblEquals(tc, 200, bound_to_180(-160), 0.0001);
+
+    // 180 and above
+    CuAssertDblEquals(tc, 180, bound_to_180(-180), 0.0001);
+    CuAssertDblEquals(tc, 360, bound_to_180(0), 0.0001);
+    CuAssertDblEquals(tc, 361, bound_to_180(1), 0.0001);
+
+    // negative angles
+    CuAssertDblEquals(tc, -1, bound_to_180(-1), 0.0001);
+    CuAssertDblEquals(tc, -180, bound_to_180(-180), 0.0001);
+    CuAssertDblEquals(tc, -181, bound_to_180(179), 0.0001);
+    CuAssertDblEquals(tc, -360, bound_to_180(0), 0.0001);
+    CuAssertDblEquals(tc, -361, bound_to_180(-1), 0.0001);
 }
 
 /**************** Tests for is_angle_between() *******************/
 void test_between_basic1(CuTest *tc) {
+    // given cases
     CuAssertTrue(tc, is_angle_between(0, 1, 2));
+    CuAssertTrue(tc, is_angle_between(0, 45, 90));
+    CuAssertFalse(tc, is_angle_between(45, 90, 270));
+
+    // undefined "middle"
+    CuAssertFalse(tc, is_angle_between(0, 0, 90));
+    CuAssertFalse(tc, is_angle_between(0, 90, 0));
+    CuAssertFalse(tc, is_angle_between(0, 45, 180));
+
+    // "direct" path is not reflex
+    CuAssertTrue(tc, is_angle_between(0, 45, 90));
+    CuAssertFalse(tc, is_angle_between(0, 135, 90));
+
+    // "direct" path is reflex
+    CuAssertFalse(tc, is_angle_between(0, 45, 270));
+    CuAssertTrue(tc, is_angle_between(0, 350, 270));
+
+    // wrap-around
+    CuAssertTrue(tc, is_angle_between(350, 0, 10));
+    CuAssertTrue(tc, is_angle_between(350, 180, 10));
+
 }
 
 int main(int argc, char const *argv[]) {
